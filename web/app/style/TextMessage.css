@@ -1,0 +1,64 @@
+.TextMessage {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1100px;
+    height: 120px;
+    padding: 12px 20px;
+    background: var(--menu-background);
+    border-top: 2px solid var(--menu-border-color);
+    color: var(--menu-font-color);
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px 10px 0 0;
+}
+
+.TextMessage_p {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.TextMessage span {
+    opacity: 0;
+}
+
+.TextMessage span.revealed {
+    opacity: 1;
+}
+
+/* Base button styles */
+.TextMessage_button {
+    font-size: 14px;
+    padding: 4px 8px;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+    position: absolute;
+    bottom: 12px;
+    color: var(--menu-font-color);
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.TextMessage_button:hover {
+    opacity: 1;
+}
+
+/* Next button positioned on the right */
+.TextMessage_button--next {
+    right: 20px;
+}
+
+/* Cancel button positioned on the left */
+.TextMessage_button--cancel {
+    left: 20px;
+    color: #ff6b6b;
+    /* Optional: different color for cancel */
+}
+
+.TextMessage_button--cancel:hover {
+    color: #ff5252;
+}

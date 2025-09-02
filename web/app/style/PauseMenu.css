@@ -1,0 +1,366 @@
+/* Gravity Falls Themed Pause Button */
+.pause-button-container {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 10;
+}
+
+.pause-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: linear-gradient(145deg, #8B4513, #A0522D);
+    color: #F5DEB3;
+    border: 2px solid #654321;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.pause-button:hover,
+.pause-button.pause-button-hover {
+    background: linear-gradient(145deg, #A0522D, #CD853F);
+    border-color: #8B4513;
+    transform: translateY(-1px);
+    box-shadow:
+        0 3px 6px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.pause-button:active {
+    transform: translateY(0);
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.pause-button svg {
+    width: 12px;
+    height: 12px;
+    opacity: 0.9;
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
+}
+
+.pause-button-text {
+    font-weight: bold;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.pause-button.disabled {
+    opacity: 0;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(50%);
+}
+
+/* Pause Menu Overlay */
+.pause-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    backdrop-filter: blur(2px);
+}
+
+/* Compact Gravity Falls Themed Sidebar */
+.PauseMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 160px;
+    /* Reduced from 220px */
+    height: 300px;
+    background: linear-gradient(180deg, #8B4513 0%, #654321 100%);
+    color: #F5DEB3;
+    border-right: 3px solid #2F1B14;
+    z-index: 2;
+    padding: 0;
+    box-shadow:
+        4px 0 15px rgba(0, 0, 0, 0.7),
+        inset -1px 0 0 rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    animation: slideInFromLeft 0.3s ease-out;
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+
+    /* Wood texture effect */
+    background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.1) 50%, transparent 50%),
+        linear-gradient(180deg, #8B4513 0%, #654321 100%);
+    background-size: 3px 3px, 100% 100%;
+}
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Compact Sidebar Header */
+.PauseMenu h2 {
+    font-size: 12px;
+    color: #F5DEB3;
+    margin: 0;
+    padding: 16px 12px 12px 12px;
+    text-align: center;
+    font-weight: bold;
+    background: linear-gradient(135deg, #654321, #8B4513);
+    border-bottom: 2px solid #2F1B14;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    position: relative;
+    font-family: 'Courier New', monospace;
+}
+
+.PauseMenu h2:after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Compact Sidebar Menu Content */
+.PauseMenu .KeyboardMenu {
+    position: relative;
+    border: 0;
+    background: transparent;
+    flex: 1;
+    padding: 6px 0;
+    overflow-y: auto;
+}
+
+/* Compact Menu Options */
+.KeyboardMenu .option {
+    position: relative;
+    margin: 0;
+    border-bottom: 1px solid rgba(47, 27, 20, 0.3);
+}
+
+.KeyboardMenu .option:last-child {
+    border-bottom: none;
+}
+
+.KeyboardMenu button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    border: 0;
+    background: none;
+    height: auto;
+    min-height: 36px;
+    /* Reduced from 42px */
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    padding: 10px 12px;
+    /* Reduced padding */
+    font-size: 11px;
+    /* Reduced from 12px */
+    color: #F5DEB3;
+    transition: all 0.2s ease;
+    position: relative;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.KeyboardMenu button:hover {
+    background: linear-gradient(90deg, rgba(160, 82, 45, 0.3), rgba(205, 133, 63, 0.2));
+    padding-left: 18px;
+    /* Reduced from 22px */
+    color: #FFFFFF;
+}
+
+.KeyboardMenu button:focus {
+    background: linear-gradient(90deg, rgba(160, 82, 45, 0.5), rgba(205, 133, 63, 0.3));
+    outline: 0;
+    padding-left: 18px;
+    /* Reduced from 22px */
+    border-left: 3px solid #CD853F;
+    /* Reduced from 4px */
+    color: #FFFFFF;
+    box-shadow: inset 0 0 8px rgba(205, 133, 63, 0.3);
+}
+
+.KeyboardMenu button:focus:before {
+    content: '▶';
+    position: absolute;
+    left: 5px;
+    color: #CD853F;
+    font-size: 9px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.KeyboardMenu .option .right {
+    position: absolute;
+    right: 12px;
+    /* Reduced from 16px */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 9px;
+    /* Reduced from 10px */
+    display: flex;
+    align-items: center;
+    color: rgba(245, 222, 179, 0.7);
+    font-family: 'Courier New', monospace;
+}
+
+/* Compact Description Box */
+.DescriptionBox {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #F5DEB3;
+    border-top: 2px solid #2F1B14;
+    background: linear-gradient(180deg, #654321, #2F1B14);
+    padding: 10px 12px;
+    /* Reduced padding */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.DescriptionBox p {
+    font-size: 10px;
+    /* Reduced from 11px */
+    margin: 0;
+    line-height: 1.3;
+    color: #F5DEB3;
+    font-family: 'Courier New', monospace;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Responsive adjustments for smaller canvas */
+@media (max-width: 1200px) {
+    .PauseMenu {
+        width: 140px;
+        /* Further reduced */
+    }
+
+    .PauseMenu h2 {
+        font-size: 11px;
+        padding: 14px 10px 10px 10px;
+    }
+
+    .KeyboardMenu button {
+        min-height: 32px;
+        padding: 8px 10px;
+        font-size: 10px;
+    }
+
+    .DescriptionBox {
+        padding: 8px 10px;
+    }
+
+    .DescriptionBox p {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 768px) {
+    .PauseMenu {
+        width: 120px;
+        /* Even more compact */
+    }
+
+    .PauseMenu h2 {
+        font-size: 10px;
+        padding: 12px 8px 8px 8px;
+    }
+
+    .KeyboardMenu button {
+        min-height: 30px;
+        padding: 6px 8px;
+        font-size: 9px;
+    }
+
+    .pause-button {
+        padding: 6px 10px;
+        font-size: 10px;
+    }
+
+    .pause-button svg {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* Special Effects for Gravity Falls Theme - Adjusted for compact size */
+.PauseMenu:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #CD853F, #F5DEB3, #CD853F);
+    opacity: 0.6;
+}
+
+/* Compact Mystery Book Style Border */
+.PauseMenu:after {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: 6px;
+    right: 6px;
+    bottom: 70px;
+    border: 1px dashed rgba(245, 222, 179, 0.3);
+    border-radius: 3px;
+    pointer-events: none;
+}
+
+/* Subtle wood grain effect */
+.KeyboardMenu button:nth-child(odd) {
+    background-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.05) 50%, transparent 100%);
+}
+
+/* Interactive feedback */
+.KeyboardMenu button:active {
+    transform: scale(0.98);
+    background: linear-gradient(90deg, rgba(47, 27, 20, 0.3), rgba(107, 67, 33, 0.3));
+}
+
+/* Alternative: Ultra-compact version for very tight spaces */
+.PauseMenu.ultra-compact {
+    width: 120px;
+}
+
+.PauseMenu.ultra-compact h2 {
+    font-size: 10px;
+    padding: 12px 8px;
+}
+
+.PauseMenu.ultra-compact .KeyboardMenu button {
+    min-height: 28px;
+    padding: 6px 8px;
+    font-size: 9px;
+}
+
+.PauseMenu.ultra-compact .DescriptionBox {
+    padding: 8px;
+}
+
+.PauseMenu.ultra-compact .DescriptionBox p {
+    font-size: 8px;
+}

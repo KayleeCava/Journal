@@ -1,0 +1,121 @@
+/* /style/CharacterSelect.css */
+
+.CharacterSelect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--menu-background);
+    border: 4px solid var(--menu-border-color);
+    color: var(--menu-font-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.CharacterSelect h1 {
+    font-family: monospace;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    /* Increased margin for better spacing */
+    text-shadow: 1px 1px #00000020;
+}
+
+/* --- The Core Changes for Horizontal Layout --- */
+.selection-menu {
+    display: flex;
+    /* CHANGED: Main direction is now a row */
+    flex-direction: row;
+    /* NEW: Allow cards to wrap to the next line if the screen is too narrow */
+    flex-wrap: wrap;
+    /* NEW: Center the cards horizontally in the container */
+    justify-content: center;
+
+    gap: 30px;
+    /* Increased gap for horizontal spacing */
+    width: 100%;
+    max-width: 700px;
+    /* Increased max-width to allow more cards per row */
+    margin-bottom: 3rem;
+}
+
+/* --- Card Style Changes to Look Better in a Row --- */
+.character-card {
+    background: var(--dialog-background);
+    border: 3px solid var(--menu-border-color);
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    text-align: center;
+    /* CHANGED: Center the name text */
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 8px #00000033;
+
+    /* CHANGED: Stack avatar and name vertically */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    /* Space between avatar and name */
+
+    width: 150px;
+    /* NEW: Give cards a uniform width */
+}
+
+.character-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px #00000044;
+}
+
+.character-card.selected {
+    border-color: var(--menu-selected-background);
+    transform: translateY(-5px) scale(1.05);
+    /* Adjusted scale */
+    box-shadow: 0 8px 16px #00000044;
+    outline: 3px solid var(--menu-selected-background);
+}
+
+.character-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    border-radius: 6px;
+    background: #00000020;
+    border: 2px solid #00000030;
+}
+
+.character-card span {
+    font-family: monospace;
+    font-size: 1.5rem;
+    /* Adjusted font size slightly */
+    color: var(--menu-font-color);
+}
+
+/* --- Start Button styling remains the same --- */
+.start-game-button {
+    font-family: monospace;
+    font-size: 1.5rem;
+    padding: 12px 30px;
+    border-radius: 8px;
+    border: 3px solid var(--menu-border-color);
+    background: var(--dialog-background);
+    color: var(--menu-font-color);
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.start-game-button:hover:not(:disabled) {
+    background-color: #fffac8;
+    transform: scale(1.05);
+}
+
+.start-game-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    filter: grayscale(50%);
+}

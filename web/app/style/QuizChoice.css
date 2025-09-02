@@ -1,0 +1,147 @@
+.QuizChoice {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    min-height: 400px;
+    padding: 30px;
+    background: var(--menu-background);
+    border: 2px solid var(--menu-border-color);
+    color: var(--menu-font-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.QuizChoice_question {
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--menu-border-color);
+}
+
+.QuizChoice_question_text {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.4;
+    font-weight: bold;
+}
+
+.QuizChoice_options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
+
+.QuizChoice_option {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    color: var(--menu-font-color);
+    font-size: 18px;
+    text-align: left;
+}
+
+.QuizChoice_option:hover,
+.QuizChoice_option.highlighted {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--menu-border-color);
+    transform: translateY(-2px);
+}
+
+.QuizChoice_option:active {
+    transform: translateY(0);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.QuizChoice_key {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: var(--menu-border-color);
+    color: var(--menu-background);
+    border-radius: 50%;
+    font-weight: bold;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.QuizChoice_text {
+    flex: 1;
+    line-height: 1.3;
+}
+
+.QuizChoice_controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid var(--menu-border-color);
+}
+
+.QuizChoice_button {
+    font-size: 14px;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--menu-border-color);
+    border-radius: 5px;
+    font-family: inherit;
+    cursor: pointer;
+    color: var(--menu-font-color);
+    transition: all 0.2s ease;
+}
+
+.QuizChoice_button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.QuizChoice_button--cancel {
+    color: #ff6b6b;
+    border-color: #ff6b6b;
+}
+
+.QuizChoice_button--cancel:hover {
+    background: rgba(255, 107, 107, 0.1);
+}
+
+.QuizChoice_hint {
+    font-size: 12px;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .QuizChoice {
+        width: 95%;
+        padding: 20px;
+        min-height: 350px;
+    }
+
+    .QuizChoice_question_text {
+        font-size: 20px;
+    }
+
+    .QuizChoice_option {
+        font-size: 16px;
+        padding: 12px 15px;
+    }
+
+    .QuizChoice_key {
+        width: 25px;
+        height: 25px;
+        margin-right: 10px;
+    }
+}
