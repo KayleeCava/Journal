@@ -4,10 +4,7 @@ class LoginScreen {
     this.mode = 'login'; // The component can be in either 'login' or 'register' mode
   }
 
-  /**
-   * Dynamically builds the HTML for the form based on the current mode.
-   * This method is responsible for rendering the correct fields and switcher links.
-   */
+
   _setupForm() {
     let formHTML;
 
@@ -33,8 +30,7 @@ class LoginScreen {
           <p class="form-switcher">Don't have an account? <a href="#" data-mode="register">Register here</a></p>
         </form>
       `;
-    } else { // Register mode
-      // This form has the "register-mode" class for specific compact styling
+    } else { 
       formHTML = `
         <form class="login-form register-mode">
           <h1>Create Account</h1>
@@ -100,10 +96,6 @@ class LoginScreen {
     });
   }
 
-  /**
-   * Handles the API call and logic for logging in.
-   * @param {HTMLFormElement} form The form element that was submitted.
-   */
   async handleLogin(form) {
     const requestBody = {
       email: form.email.value,
@@ -119,10 +111,7 @@ class LoginScreen {
     }
   }
 
-  /**
-   * Handles the API call and logic for registration.
-   * @param {HTMLFormElement} form The form element that was submitted.
-   */
+
   async handleRegister(form) {
     const password = form.password.value;
     const password_confirmation = form.password_confirmation.value;
@@ -153,39 +142,25 @@ class LoginScreen {
     }
   }
 
-  /**
-   * A unified success handler for both login and registration.
-   * Saves data to localStorage and resolves the init promise.
-   * @param {object} data The data object from the API response.
-   */
+
   handleAuthSuccess(data) {
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
-    console.log('Authentication Success!', data);
     this.onComplete(data);
   }
 
-  /**
-   * Creates the main DOM element for the component.
-   */
+
   createElement() {
     this.element = document.createElement("div");
     this.element.classList.add("LoginScreen");
     this._setupForm(); // Call for the initial render
   }
 
-  /**
-   * Removes the component's element from the DOM.
-   */
+
   destroy() {
     this.element.remove();
   }
 
-  /**
-   * Initializes the component and returns a Promise that resolves on successful authentication.
-   * @param {HTMLElement} container The DOM element to append the login screen to.
-   * @returns {Promise<object>} A promise that resolves with the user and token data.
-   */
   init(container) {
     return new Promise(resolve => {
       this.createElement();

@@ -1,5 +1,3 @@
-// /js/CharacterSelect.js
-
 class CharacterSelect {
     constructor(config) {
         this.characters = config.characters;

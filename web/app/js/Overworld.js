@@ -10,8 +10,6 @@ class Overworld {
     this.token = null;
     this.playerInfo = null;
     this.data = null;
-
-    this.saveInterval = null;
   }
 
   startGameLoop() {
@@ -149,16 +147,12 @@ class Overworld {
       characterSrc: this.playerSpriteSrc,
     };
 
-    console.log("Preparing to save game state...");
-
     try {
       // Step 1: Get the serialized string from our PHP helper script.
       const serializedString = await API_SERVICE.serializeGame(saveData);      
 
-      console.log("PHP Serialized Data:", serializedString);
       // Step 2: Send the serialized string to the main game API for persistent storage.
       const apiResponse = await API_SERVICE.saveGame(serializedString.data.serialized_data);      
-      console.log("Game state successfully saved to API.", apiResponse);
 
     } catch (error) {
       console.error("Failed to save game data to backend:", error);
@@ -168,10 +162,8 @@ class Overworld {
 
   async updatePlayerInfo() {
     try {
-      console.log("Refreshing player profile...");
       const response = await API_SERVICE.getProfile();
-      this.playerInfo = response.data; // Fix: use response.data instead of response
-      console.log("Player profile updated!", this.playerInfo);
+      this.playerInfo = response.data; 
 
     } catch (error) {
       console.error("Could not update player info:", error);
@@ -194,7 +186,6 @@ class Overworld {
 
       if (potentialMapConfig && potentialMapConfig.requiresAdmin) {
         if (this.playerInfo.role === "admin") {
-          console.log(`Admin user (ID: 1) loading restricted map '${potentialMapId}' from save. Access granted.`);
           startingMapId = potentialMapId;
           heroInitialState = {
             x: savedGameData.playerX,
@@ -224,10 +215,5 @@ class Overworld {
     this.directionInput.init();
 
     this.startGameLoop();
-
-    clearInterval(this.saveInterval);
-    this.saveInterval = setInterval(() => {
-      this.saveGame();
-    }, 5000);
   }
 }

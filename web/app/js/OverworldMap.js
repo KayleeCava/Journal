@@ -31,16 +31,6 @@ class OverworldMap {
 
   isSpaceTaken(currentX, currentY, direction) {
     const { x, y } = utils.nextPosition(currentX, currentY, direction);
-
-    // const snappedX = Math.round(x / 38) * 38;
-    // const snappedY = Math.round(y / 65) * 65;
-    // const snappedKey = `${snappedX},${snappedY}`;
-
-    // // If it's a static wall, use snapped position
-    // if (this.staticWallKeys.has(snappedKey)) {
-    //   return this.walls[snappedKey] || false;
-    // }
-
     return this.walls[`${x},${y}`] || false;
   }
 
@@ -48,7 +38,6 @@ class OverworldMap {
     Object.keys(this.gameObjects).forEach(key => {
       let object = this.gameObjects[key];
       object.id = key
-      console.log(object.id)
       object.mount(this);
     })
   }
@@ -60,7 +49,6 @@ class OverworldMap {
     for (let i = 0; i < events.length; i++) {
       // Check if cutscene was cancelled before processing next event
       if (this.isCutsceneCancelled) {
-        console.log(`Cutscene cancelled at event ${i}/${events.length}`);
         break; // Exit the loop, stopping all remaining events
       }
 
@@ -72,7 +60,6 @@ class OverworldMap {
       try {
         await eventHandler.init();
       } catch (error) {
-        console.log("Event cancelled or errored:", error);
         break; // Stop on any error or cancellation
       }
     }
@@ -133,7 +120,6 @@ class OverworldMap {
   checkForFootstepCutscene() {
     const hero = this.gameObjects["hero"];
     const match = this.cutsceneSpaces[`${hero.x},${hero.y}`];
-    console.log(match)
     if (!this.isCutscenePlaying && match) {
       this.startCutscene(match[0].events)
     }
@@ -151,8 +137,6 @@ class OverworldMap {
         }, 100);
       }
     });
-
-    console.log("Cutscene cancelled - all remaining events stopped");
   }
   addWall(x, y) {
     this.walls[`${x},${y}`] = true;
@@ -896,7 +880,7 @@ window.OverworldMaps = {
               {
                 type: "fetchAdminFlag",
                 // Provide the message for non-admin users
-                lockedMessage: "A strange energy blocks you from interacting with this object."
+                lockedMessage: "This treasure chest is for Admins only"
               },
             ]
           }

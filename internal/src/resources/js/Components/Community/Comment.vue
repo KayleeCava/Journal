@@ -14,6 +14,9 @@ const props = defineProps({
 const emit = defineEmits(['reply', 'require-auth']);
 
 const isLikingComment = ref(false);
+const isExpanded = ref(false);
+
+const isLongComment = computed(() => props.comment.content.length > 250);
 
 const repliesToShow = ref(2);
 const areAllRepliesShown = computed(() => {
@@ -82,11 +85,15 @@ const authorAvatarUrl = computed(() => {
         <div class="flex-grow min-w-0">
             <div class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4">
                 <p class="font-semibold text-gray-800 dark:text-gray-200">{{ comment.author.username }}</p>
-                <p class="text-gray-700 dark:text-gray-300 mt-1 break-words whitespace-pre-wrap">{{ comment.content }}</p>
+                <p class="text-gray-700 dark:text-gray-300 mt-1 break-words whitespace-pre-wrap"
+                   :class="{ 'line-clamp-4': !isExpanded && isLongComment }">
+                    {{ comment.content }}
+                </p>
             </div>
             <div class="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400 mt-2 pl-1">
                 <span>{{ formatDate(comment.created_at) }}</span>
 
+                <!-- Nút Like -->
                 <button
                     @click="toggleCommentLike(comment)"
                     :disabled="isLikingComment"
@@ -98,7 +105,14 @@ const authorAvatarUrl = computed(() => {
                     <span>{{ comment.likes_count }}</span>
                 </button>
 
+                <!-- Nút Trả lời -->
                 <button @click="emit('reply', comment)" class="font-semibold hover:underline">Trả lời</button>
+
+                <button v-if="isLongComment"
+                        @click="isExpanded = !isExpanded"
+                        class="font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">
+                    {{ isExpanded ? 'Thu gọn' : 'Xem thêm' }}
+                </button>
             </div>
 
             <!-- PHẦN ĐỆ QUY -->

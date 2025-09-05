@@ -1,4 +1,5 @@
 <?php
+
 require_once 'headers.php';
 
 // Check for POST request method
@@ -12,22 +13,28 @@ require_once 'InventoryManager.php';
 require_once 'PlayerStatus.php';
 require_once 'GameLogger.php';
 
-// Get and validate JSON input
 $data = getJsonInput();
-
-// Validate required fields
 validateRequiredFields($data, ['save_game_string']);
 
-// Unserialize the data
+// 1. Get the Base64 encoded string
+$base64EncodedString = $data['save_game_string'];
+
+// 2. Decode the Base64 string
+$serializedString = base64_decode($base64EncodedString);
+if ($serializedString === false) {
+    sendErrorResponse("Invalid Base64 data provided. Cannot decode.", 400);
+}
+
+// 3. Unserialize the DECODED string
 ob_start();
-$heroObject = unserialize($data['save_game_string']);
+$heroObject = unserialize($serializedString);
 ob_end_clean();
 
 // Validate unserialization
-if ($heroObject === false && $data['save_game_string'] !== serialize(false)) {
-    sendErrorResponse("Failed to unserialize the provided string. It might be corrupted.");
+if ($heroObject === false && $serializedString !== serialize(false)) {
+    sendErrorResponse("Failed to unserialize the provided string after decoding.", 400);
 }
 
-// Send success response
-sendSuccessResponse($heroObject, "Data unserialized successfully.");
+// 4. Send the successful result back to the game client
+sendSuccessResponse($heroObject, "Data decoded and unserialized successfully.");
 ?>

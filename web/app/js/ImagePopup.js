@@ -1,5 +1,3 @@
-// /js/ImagePopup.js
-
 class ImagePopup {
     constructor({ src, onComplete }) {
         this.src = src;

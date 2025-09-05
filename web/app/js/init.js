@@ -1,12 +1,9 @@
-// /js/init.js (UPDATED)
-
 (async () => {
   const container = document.querySelector(".game-container");
   let loginData = null;
   let chosenCharacterSrc = null;
-  let savedGameData = null; // This will hold our final, usable game state object
+  let savedGameData = null; 
 
-  // 1. & 2. LOGIN / SESSION VALIDATION (This part remains unchanged)
   const existingToken = localStorage.getItem("token");
   const existingUserString = localStorage.getItem("user");
 
@@ -17,7 +14,7 @@
     } catch (error) {
       console.error(error.message);
       localStorage.removeItem("token");
-      localStorage.removeItem("user"); // This can be removed too
+      localStorage.removeItem("user");
     }
   }
 
@@ -28,7 +25,6 @@
       try {
         const fullProfileData = await API_SERVICE.getProfile();
         loginData.user = fullProfileData.data;
-        console.log("Full profile fetched.", loginData.user);
       } catch (error) {
         console.error("Critical error fetching profile after login:", error.message);
         loginData = null;
@@ -36,17 +32,14 @@
     }
   }
 
-  // --- NEW LOADING & UNSERIALIZING LOGIC ---
+
   if (loginData) {
-    const savedGameString = loginData.user.save_game; // Get the serialized string from the profile
+    const savedGameString = loginData.user.save_game; 
 
     if (savedGameString) {
-      console.log("Received serialized data from API:", savedGameString);
       try {
-        // Call our new PHP script to unserialize the data using API_SERVICE
         const result = await API_SERVICE.loadGame(savedGameString);
         savedGameData = result.data; // This is now our usable JSON object
-        console.log("Unserialized game data:", savedGameData);
 
         // If the loaded data has a character, set it for the next step
         if (savedGameData && savedGameData.characterSrc) {
@@ -59,10 +52,7 @@
       }
     }
   }
-  // --- END NEW LOGIC ---
-
-  // 4. IF LOGGED IN BUT NO CHARACTER, START CHARACTER SELECTION
-  // This logic now correctly handles new users (save_game is null) or users with null characterSrc
+  
   if (loginData && !chosenCharacterSrc) {
     const availableCharacters = [
       { name: "Dipper", src: "/images/characters/dipper.png", avatarSrc: "/images/avatars/dipper.png" },
@@ -95,7 +85,6 @@
     };
   }
 
-  // 5. START THE GAME
   if (loginData && chosenCharacterSrc) {
     const overworld = new Overworld({ element: container });
     overworld.init(chosenCharacterSrc, loginData, savedGameData);

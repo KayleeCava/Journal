@@ -23,7 +23,6 @@ class Inventory {
 
             const imagePromises = this.items.map(item => API_SERVICE.fetchImage(item.image));
             const imageDataUris = await Promise.all(imagePromises);
-            console.log(imageDataUris);
             grid.innerHTML = "";
             this.items.forEach((item, index) => {
                 const card = document.createElement("div");

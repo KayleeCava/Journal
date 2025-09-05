@@ -99,24 +99,24 @@ class PauseMenu {
         }
 
         // ... 'Community' and 'howToPlay' page keys remain the same ...
-        if (pagekey === "Community") {
-            return [
-                {
-                    label: "Community Page",
-                    description: "Some forum related actions here",
-                    handler: () => {
-                        console.log("Opening Community...");
-                    }
-                },
-                {
-                    label: "Back",
-                    description: "Go back to main pause menu",
-                    handler: () => {
-                        this.keyboardMenu.setOptions(this.getOptions("root"));
-                    }
-                },
-            ];
-        }
+        // if (pagekey === "Community") {
+        //     return [
+        //         {
+        //             label: "Community Page",
+        //             description: "Some forum related actions here",
+        //             handler: () => {
+        //                 console.log("Opening Community...");
+        //             }
+        //         },
+        //         {
+        //             label: "Back",
+        //             description: "Go back to main pause menu",
+        //             handler: () => {
+        //                 this.keyboardMenu.setOptions(this.getOptions("root"));
+        //             }
+        //         },
+        //     ];
+        // }
 
         if (pagekey === "howToPlay") {
             return [

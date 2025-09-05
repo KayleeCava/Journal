@@ -209,7 +209,7 @@ const formatDate = (dateString) => {
                                         <LockClosedIcon class="w-4 h-4 mr-1.5"/> Riêng tư
                                     </span>
 
-                                    <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-gray-100 leading-tight">
+                                    <h1 class="flex-1 min-w-0 text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-gray-100 leading-tight break-words">
                                         {{ post.title }}
                                     </h1>
                                 </div>
@@ -223,7 +223,7 @@ const formatDate = (dateString) => {
                             </header>
 
                             <!-- Nội dung bài viết -->
-                            <div class="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300" v-html="post.content"></div>
+                            <div class="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 break-words" v-html="post.content"></div>
 
                             <!-- Thanh tương tác -->
                             <footer class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 flex items-center justify-between">
@@ -322,7 +322,7 @@ const formatDate = (dateString) => {
                             <h3 class="font-bold text-gray-900 dark:text-gray-100 mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Bài Viết Liên Quan</h3>
                             <ul class="space-y-3">
                                 <li v-for="related in relatedPosts" :key="related.id">
-                                    <a :href="`/posts/${related.slug}`" class="text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{{ related.title }}</a>
+                                    <a :href="`/posts/${related.slug}`" class="text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors break-words">{{ related.title }}</a>
                                 </li>
                             </ul>
                         </div>

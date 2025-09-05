@@ -145,7 +145,7 @@ const API_SERVICE = {
   // Get inventory
   async getInventory() {
     try {
-      const response = await apiClient.get('/api/inventory');
+      const response = await apiClient.get('/api/inventory?page=1&per_page=99');
       return response.data;
     } catch (error) {
       console.error('Error fetching inventory:', error);
@@ -169,7 +169,6 @@ const API_SERVICE = {
   async fetchImage(path) {
     try {
       const response = await apiClient.get(`/api${path}`);
-      console.log(response.data);
       return response.data.data.data_uri;
     } catch (error) {
       console.error('Error fetching image:', error);
@@ -212,9 +211,3 @@ const API_SERVICE = {
 // Make API_SERVICE available globally
 window.API_SERVICE = API_SERVICE;
 window.API_CONFIG = API_CONFIG;
-
-// Log configuration for debugging
-console.log('API Configuration loaded:', {
-  baseURL: API_CONFIG.INTERNAL_URL,
-  localBaseURL: window.location.origin
-});

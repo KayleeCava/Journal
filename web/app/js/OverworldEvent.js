@@ -60,17 +60,6 @@ class OverworldEvent {
         message.init(document.querySelector(".game-container"));
     }
 
-    // Updated quizChoice method for OverworldEvent class
-    // ... inside OverworldEvent class
-
-    // ... inside the OverworldEvent class ...
-
-    // /js/OverworldEvent.js
-
-    // ... (keep the constructor, stand, walk, and textMessage methods) ...
-
-    // ... inside the OverworldEvent class ...
-
     quizChoice(resolve) {
         const quizKeyToIdMap = {
             "level_1": 2, "level_2": 3, "level_3": 4, "level_4": 5, "level_5": 6,
@@ -83,10 +72,7 @@ class OverworldEvent {
             const quizId = quizKeyToIdMap[correctKey];
             const playerInfo = this.map.overworld.playerInfo;
 
-            // --- THIS IS THE CORRECTED LINE ---
-            // We check playerInfo.answer_keys directly, because playerInfo *is* the user object.
             if (playerInfo && playerInfo.answer_keys && playerInfo.answer_keys.includes(quizId)) {
-                console.log(`Quiz ${correctKey} (ID: ${quizId}) is already solved. Skipping.`);
                 resolve();
                 return;
             }
@@ -140,22 +126,50 @@ class OverworldEvent {
     changeMap(resolve) {
         const isAdminRequired = this.event.isAdmin === true;
 
+        // if (isAdminRequired) {
+
+        //     if (this.map.overworld.playerInfo.role !== "admin") {
+
+        //         const message = new TextMessage({
+        //             text: "You are not admin go away!!!",
+        //             onComplete: () => {
+        //                 resolve(); 
+        //             }
+        //         });
+        //         message.init(document.querySelector(".game-container"));
+
+        //         return; 
+        //     }
+
+
+        // }
+
         if (isAdminRequired) {
+            let userIsAdmin = false;
+            const userString = localStorage.getItem("user");
 
-            if (this.map.overworld.playerInfo.role !== "admin") {
+            if (userString) {
+                try {
+                    const localUser = JSON.parse(userString);
+                    if (localUser && localUser.role === "admin") {
+                        userIsAdmin = true;
+                    }
+                } catch (e) {
+                    // console.error("CTF check: Could not parse user from localStorage.", e);
+                    userIsAdmin = false;
+                }
+            }
 
+            if (!userIsAdmin) {
                 const message = new TextMessage({
                     text: "You are not admin go away!!!",
                     onComplete: () => {
-                        resolve(); 
+                        resolve();
                     }
                 });
                 message.init(document.querySelector(".game-container"));
-
-                return; 
+                return;
             }
-
-
         }
 
         const sceneTransition = new SceneTransition();
@@ -222,7 +236,6 @@ class OverworldEvent {
     }
     
     pause(resolve) {
-        console.log("pause using tab")
         this.map.isPaused = true;
         const menu = new PauseMenu({
             overworld: this.map.overworld,
